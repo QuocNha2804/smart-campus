@@ -1,4 +1,3 @@
-// src/types/index.ts
 export type OpeningStatus = "open" | "closed" | "busy";
 
 export interface CampusService {

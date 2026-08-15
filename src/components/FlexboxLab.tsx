@@ -37,8 +37,6 @@ const FlexboxLab = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}> Flexbox Laboratory</Text>
-
-      {/* Bảng điều khiển */}
       <View style={styles.controls}>
         {/* Nút chuyển đổi Direction */}
         <TouchableOpacity
@@ -103,7 +101,6 @@ const FlexboxLab = () => {
         </View>
       </View>
 
-      {/* Container Flexbox - NƠI THỰC HÀNH */}
       <View
         style={[
           styles.flexContainer,
@@ -129,7 +126,6 @@ const FlexboxLab = () => {
         ))}
       </View>
 
-      {/* Thông tin hiển thị */}
       <View style={styles.infoBox}>
         <Text style={styles.infoText}>
           Direction: {direction}

@@ -1,62 +1,11 @@
-// // app/(tabs)/index.tsx
-// import React from "react";
-// import { SafeAreaView, ScrollView } from "react-native";
-// import StudentCard from "../../src/components/StudentCard"; // Import component từ thư mục src
-
-// export default function TabOneScreen() {
-//   // Dữ liệu test bình thường
-//   const normalData = {
-//     studentId: "23636501",
-//     name: "Trần Quốc Nhã",
-//     major: "Kĩ Thuật Phần Mềm",
-//     cohort: "K19",
-//   };
-
-//   // Dữ liệu test Stress (Tên ngành dài 50 ký tự)
-//   const stressData = {
-//     studentId: "24692521",
-//     name: "Lê Thanh Vân",
-//     major:
-//       "Kỹ thuật phần mềm ứng dụng và trí tuệ nhân tạo đa phương tiện trong kỷ nguyên số 4.0 ABCXYZ",
-//     cohort: "K20",
-//   };
-
-//   return (
-//     <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f2f5" }}>
-//       <ScrollView>
-//         {/* Thẻ thứ nhất: Dữ liệu ngắn */}
-//         <StudentCard
-//           studentId={normalData.studentId}
-//           name={normalData.name}
-//           major={normalData.major}
-//           cohort={normalData.cohort}
-//         />
-
-//         {/* Thẻ thứ hai: Dữ liệu dài (Test Stress) */}
-//         <StudentCard
-//           studentId={stressData.studentId}
-//           name={stressData.name}
-//           major={stressData.major}
-//           cohort={stressData.cohort}
-//         />
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// }
-
-// app/(tabs)/index.tsx
-// app/(tabs)/index.tsx
 import React, { useState } from "react"; // ✅ THÊM: import useState
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import StudentCard from "../../src/components/StudentCard";
-// ✅ THÊM MỚI: Import CampusStatusCard
 import CampusStatusCard from "../../src/components/CampusStatusCard";
-// ✅ THÊM MỚI: Import types
+import StudentCard from "../../src/components/StudentCard";
 import { CampusService } from "../../src/types";
 import { getServiceDisplayText } from "../../src/utils/serviceUtils";
 
 export default function TabOneScreen() {
-  // ===== CODE CŨ (GIỮ NGUYÊN) =====
   const normalData = {
     studentId: "23636501",
     name: "Trần Quốc Nhã",
@@ -71,7 +20,6 @@ export default function TabOneScreen() {
     cohort: "K20",
   };
 
-  // ===== CODE CŨ: Dữ liệu Campus Service (Câu 5) =====
   const campusServices: CampusService[] = [
     {
       id: 101,
