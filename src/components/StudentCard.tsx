@@ -1,4 +1,3 @@
-// src/components/StudentCard.tsx
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -40,7 +39,11 @@ const StudentCard = ({
   };
 
   return (
-    <View style={styles.cardContainer}>
+    // CÂU 9 thêm accessibilityLabel cho toàn bộ thẻ cha
+    <View
+      style={styles.cardContainer}
+      accessibilityLabel={`Thẻ thông tin sinh viên ${name}`}
+    >
       <Text style={styles.cardTitle}>THÔNG TIN SINH VIÊN</Text>
 
       <InfoRow label="Mã SV:" value={studentId} />
@@ -51,19 +54,28 @@ const StudentCard = ({
       {/*Hiển thị trạng thái đã lưu */}
       <View style={styles.messageSection}>
         <Text style={styles.messageLabel}>Trạng thái:</Text>
-        <Text style={styles.committedMessage}>{committedMessage}</Text>
+        {/* CÂU 9 thêm nhãn mô tả cho text trạng thái */}
+        <Text
+          style={styles.committedMessage}
+          accessibilityLabel={`Trạng thái hiện tại là ${committedMessage}`}
+        >
+          {committedMessage}
+        </Text>
       </View>
 
       {/*Chỉnh sửa trạng thái mới */}
       <View style={styles.editSection}>
         <Text style={styles.editLabel}>Cập nhật trạng thái:</Text>
+        {/* CÂU 9 thêm nhãn cho TextInput */}
         <TextInput
           style={styles.input}
           value={draftMessage}
           onChangeText={setDraftMessage}
           placeholder="Nhập trạng thái mới..."
           multiline
+          accessibilityLabel="Ô nhập trạng thái mới"
         />
+        {/* CÂU 9 thêm nhãn và role cho nút bấm */}
         <TouchableOpacity
           style={[
             styles.saveButton,
@@ -71,6 +83,8 @@ const StudentCard = ({
           ]}
           onPress={handleSave}
           disabled={!draftMessage.trim()}
+          accessibilityLabel="Nút lưu trạng thái"
+          accessibilityRole="button" // <--- MỚI
         >
           <Text style={styles.saveButtonText}> Lưu</Text>
         </TouchableOpacity>
