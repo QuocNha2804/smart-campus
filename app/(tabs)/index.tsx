@@ -50,8 +50,10 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import StudentCard from "../../src/components/StudentCard";
 
 // Import Câu 5
+import FlexboxLab from "@/src/components/FlexboxLab";
 import { CampusService } from "../../src/types";
 import { getServiceDisplayText } from "../../src/utils/serviceUtils";
+//import cau 7
 
 export default function TabOneScreen() {
   const normalData = {
@@ -120,6 +122,7 @@ export default function TabOneScreen() {
             </View>
           ))}
         </View>
+        <FlexboxLab />
       </ScrollView>
     </SafeAreaView>
   );
