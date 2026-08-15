@@ -72,7 +72,7 @@ export default function TabOneScreen() {
   const campusServices: CampusService[] = [
     {
       id: 101,
-      name: "Thư viện Đại học Công nghệ",
+      name: "Thư viện Đại học Công nghiệp",
       openingStatus: "busy",
       waitTime: 15,
       locations: ["Tầng trệt - Tầng kĩ thuật", "Tầng 2 - Tầng 3"],
