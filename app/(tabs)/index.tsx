@@ -1,98 +1,155 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+// // app/(tabs)/index.tsx
+// import React from "react";
+// import { SafeAreaView, ScrollView } from "react-native";
+// import StudentCard from "../../src/components/StudentCard"; // Import component từ thư mục src
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+// export default function TabOneScreen() {
+//   // Dữ liệu test bình thường
+//   const normalData = {
+//     studentId: "23636501",
+//     name: "Trần Quốc Nhã",
+//     major: "Kĩ Thuật Phần Mềm",
+//     cohort: "K19",
+//   };
 
-export default function HomeScreen() {
+//   // Dữ liệu test Stress (Tên ngành dài 50 ký tự)
+//   const stressData = {
+//     studentId: "24692521",
+//     name: "Lê Thanh Vân",
+//     major:
+//       "Kỹ thuật phần mềm ứng dụng và trí tuệ nhân tạo đa phương tiện trong kỷ nguyên số 4.0 ABCXYZ",
+//     cohort: "K20",
+//   };
+
+//   return (
+//     <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f2f5" }}>
+//       <ScrollView>
+//         {/* Thẻ thứ nhất: Dữ liệu ngắn */}
+//         <StudentCard
+//           studentId={normalData.studentId}
+//           name={normalData.name}
+//           major={normalData.major}
+//           cohort={normalData.cohort}
+//         />
+
+//         {/* Thẻ thứ hai: Dữ liệu dài (Test Stress) */}
+//         <StudentCard
+//           studentId={stressData.studentId}
+//           name={stressData.name}
+//           major={stressData.major}
+//           cohort={stressData.cohort}
+//         />
+//       </ScrollView>
+//     </SafeAreaView>
+//   );
+// }
+
+// app/(tabs)/index.tsx
+import React from "react";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import StudentCard from "../../src/components/StudentCard";
+
+// Import Câu 5
+import { CampusService } from "../../src/types";
+import { getServiceDisplayText } from "../../src/utils/serviceUtils";
+
+export default function TabOneScreen() {
+  const normalData = {
+    studentId: "23636501",
+    name: "Trần Quốc Nhã",
+    major: "Kĩ Thuật Phần Mềm",
+    cohort: "K19",
+  };
+
+  const stressData = {
+    studentId: "24692521",
+    name: "Lê Thanh Vân",
+    major:
+      "Kỹ thuật phần mềm ứng dụng và trí tuệ nhân tạo đa phương tiện trong kỷ nguyên số 4.0 ABCXYZ",
+    cohort: "K20",
+  };
+
+  const campusServices: CampusService[] = [
+    {
+      id: 101,
+      name: "Thư viện Đại học Công nghệ",
+      openingStatus: "busy",
+      waitTime: 15,
+      locations: ["Tầng trệt - Tầng kĩ thuật", "Tầng 2 - Tầng 3"],
+    },
+    {
+      id: 102,
+      name: "Phòng Gym",
+      openingStatus: "open",
+      waitTime: 5,
+      locations: ["Tầng 1 - Khu thể thao"],
+    },
+    {
+      id: 103,
+      name: "Khoa CNTT",
+      openingStatus: "closed",
+      locations: ["Tầng 2 - Tòa H"],
+    },
+  ];
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f2f5" }}>
+      <ScrollView>
+        <StudentCard
+          studentId={normalData.studentId}
+          name={normalData.name}
+          major={normalData.major}
+          cohort={normalData.cohort}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <StudentCard
+          studentId={stressData.studentId}
+          name={stressData.name}
+          major={stressData.major}
+          cohort={stressData.cohort}
+        />
+
+        {/* cau 5 */}
+        <View style={styles.cau5Container}>
+          <Text style={styles.cau5Title}>CÂU 5: THÔNG TIN DỊCH VỤ</Text>
+          {campusServices.map((service) => (
+            <View key={service.id} style={styles.cau5Item}>
+              <Text style={styles.cau5Text}>
+                {getServiceDisplayText(service)}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  cau5Container: {
+    margin: 16,
+    padding: 16,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e8e8e8",
   },
-  stepContainer: {
-    gap: 8,
+  cau5Title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 12,
+    color: "#2c3e50",
+  },
+  cau5Item: {
+    padding: 12,
+    backgroundColor: "#f8f9fa",
+    borderRadius: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  cau5Text: {
+    fontSize: 14,
+    color: "#333",
+    lineHeight: 22,
   },
 });
