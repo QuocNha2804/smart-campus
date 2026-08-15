@@ -45,17 +45,18 @@
 // }
 
 // app/(tabs)/index.tsx
-import React from "react";
+// app/(tabs)/index.tsx
+import React, { useState } from "react"; // ✅ THÊM: import useState
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import StudentCard from "../../src/components/StudentCard";
-
-// Import Câu 5
-import FlexboxLab from "@/src/components/FlexboxLab";
+// ✅ THÊM MỚI: Import CampusStatusCard
+import CampusStatusCard from "../../src/components/CampusStatusCard";
+// ✅ THÊM MỚI: Import types
 import { CampusService } from "../../src/types";
 import { getServiceDisplayText } from "../../src/utils/serviceUtils";
-//import cau 7
 
 export default function TabOneScreen() {
+  // ===== CODE CŨ (GIỮ NGUYÊN) =====
   const normalData = {
     studentId: "23636501",
     name: "Trần Quốc Nhã",
@@ -66,11 +67,11 @@ export default function TabOneScreen() {
   const stressData = {
     studentId: "24692521",
     name: "Lê Thanh Vân",
-    major:
-      "Kỹ thuật phần mềm ứng dụng và trí tuệ nhân tạo đa phương tiện trong kỷ nguyên số 4.0 ABCXYZ",
+    major: "Kỹ Thuật Phần Mềm",
     cohort: "K20",
   };
 
+  // ===== CODE CŨ: Dữ liệu Campus Service (Câu 5) =====
   const campusServices: CampusService[] = [
     {
       id: 101,
@@ -94,6 +95,15 @@ export default function TabOneScreen() {
     },
   ];
 
+  // câu 10 state để lưu campus được chọn
+  const [selectedCampusId, setSelectedCampusId] = useState<number | null>(null);
+
+  //câu 10 typed callback để chọn campus
+  const handleSelectCampus = (id: number) => {
+    setSelectedCampusId(id);
+    console.log(` Đã chọn campus ID: ${id}`);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f2f5" }}>
       <ScrollView>
@@ -111,7 +121,7 @@ export default function TabOneScreen() {
           cohort={stressData.cohort}
         />
 
-        {/* cau 5 */}
+        {/* cau 5*/}
         <View style={styles.cau5Container}>
           <Text style={styles.cau5Title}>CÂU 5: THÔNG TIN DỊCH VỤ</Text>
           {campusServices.map((service) => (
@@ -122,7 +132,27 @@ export default function TabOneScreen() {
             </View>
           ))}
         </View>
-        <FlexboxLab />
+
+        {/* cau 10 campusStatusCard */}
+        <View style={styles.cau10Container}>
+          <Text style={styles.cau10Title}>CÂU 10: CHỌN CAMPUS</Text>
+
+          {/* Hiển thị campus đã chọn */}
+          <Text style={styles.cau10SubTitle}>
+            {selectedCampusId !== null
+              ? `Đã chọn: ${campusServices.find((c) => c.id === selectedCampusId)?.name}`
+              : "Vui lòng chọn một campus"}
+          </Text>
+
+          {campusServices.map((campus) => (
+            <CampusStatusCard
+              key={campus.id}
+              campus={campus}
+              isSelected={selectedCampusId === campus.id}
+              onSelectCampus={handleSelectCampus}
+            />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -154,5 +184,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#333",
     lineHeight: 22,
+  },
+
+  // cau 10
+  cau10Container: {
+    margin: 16,
+    padding: 16,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e8e8e8",
+  },
+  cau10Title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 12,
+    color: "#2c3e50",
+  },
+  cau10SubTitle: {
+    fontSize: 14,
+    color: "#0066cc",
+    marginBottom: 12,
+    textAlign: "center",
+    fontWeight: "500",
   },
 });
